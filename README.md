@@ -5,7 +5,7 @@ We created a compose of docker containers to run ShTP via one command(almost). T
 To run ShTP we recomend to use a server running Linux. I don't know how docker works on Windows. 
 * Then you have to install docker and docker compose. </br>
 Arch-based: `sudo pacman -S docker docker-compose`</br>
-Debian-based: `sudo apt install docker docker-compose`
+Debian-based(ex. Ubuntu Server): `sudo apt install docker docker-compose`
 * Run docker daemon and setup its autorun (for systemd init solutions) </br>
 ```
 sudo systemctl enable docker
@@ -19,7 +19,7 @@ newgrp docker
 ```
 You may need to relogin to apply changes. But now, our server is ready.
 
-# How to run
+# Prepare sources
 * Then download sources of Backend and Frontend to any folder of your server. We use such directory tree: </br>
 ```
 ── ShTP
@@ -35,13 +35,20 @@ To download sources, use git:
 git clone https://github.com/ITClassDev/Backend
 git clone https://github.com/ITClassDev/FrontEnd
 ```
+* If you run ShTP on production server, you have to tune backend settings in `Backend/Dockerfile` file(for more refer to Backend's readme). </br>
+Change values below to yours():
+```
+ITC_SECRET_KEY="PLACE RANDOM STRING HERE" # this string used for jwt token encryption (salt)
+ITC_SETUP_MODE=1 # Set this value to 1 to enable setup mode on ShTP, then after setup stop ShTP, change to 0 and restart ShTP
+```
+# Run ShTP
 * Change pathes to sources of Frontend and Backend in `.env` file (you can use absolute or relative path)
 ```
 BACKEND_SOURCE="../Backend/"
 FRONTEND_SOURCE="../Frontend"
 ```
-* Export variables from .env to your session: `source ./.env`
-* Run `docker-compose -f docker-compose.dev.yaml up` or `./run.sh`
+* Export variables from .env to your terminal session: `source ./.env`
+* Run `docker-compose -f docker-compose.dev.yaml up` or `./run.sh` (If you changed some code, run docker-compose with --build flag at the end of command)
 The first time run of docker-compose can take some time, because it will build Frontend, Backend docker images and download postgresql image.
 </br> You will be able to access ShTP after such line in docker log (last container is frontend): </br>
 `docker-frontend-1  |  INFO  Accepting connections at http://localhost:3000`
