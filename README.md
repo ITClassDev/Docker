@@ -3,24 +3,35 @@ We created a compose of docker containers to run ShTP via one command(almost). T
 
 # Automatic installation
 ### Prepare
-* Create ShTP folder
-* Clone this repository
+These scripts perform the following actions:
+* Install Docker and Docker-Compose
+* Clones the necessary repositories to the directories
 
 Arch-Based systems:
 ```shell
+sudo pacman -S docker docker-compose
+sudo systemctl enable docker
+sudo systemctl start docker
 mkdir ShTP
 cd ShTP
 git clone https://github.com/ITClassDev/Docker
-cd Docker
-./install-arch.sh
+git clone https://github.com/ITClassDev/Backend
+git clone https://github.com/ITClassDev/FrontEnd
 ```
 Debian-Based systems:
 ```shell
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -fy
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -fy
+sudo apt install docker docker-compose -fy
+sudo systemctl enable docker
+sudo systemctl start docker
 mkdir ShTP
 cd ShTP
 git clone https://github.com/ITClassDev/Docker
-cd Docker
-./install-deb.sh
+git clone https://github.com/ITClassDev/Backend
+git clone https://github.com/ITClassDev/FrontEnd
 ```
 
 If you run ShTP on production server, you have to tune backend settings in `Backend/Dockerfile` file(for more refer to Backend's readme). </br>
@@ -29,11 +40,10 @@ Change values below to yours():
 ITC_SECRET_KEY="PLACE RANDOM STRING HERE" # this string used for jwt token encryption (salt)
 ITC_SETUP_MODE=1 # Set this value to 1 to enable setup mode on ShTP, then after setup stop ShTP, change to 0 and restart ShTP
 ```
-
 ### Run
-
-Just use run.sh script
+Just use run.sh script in Docker folder
 ```shell
+cd Docker
 ./run.sh
 ```
 
