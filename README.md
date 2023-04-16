@@ -9,29 +9,11 @@ These scripts perform the following actions:
 
 Arch-Based systems:
 ```shell
-sudo pacman -S docker docker-compose
-sudo systemctl enable docker
-sudo systemctl start docker
-mkdir ShTP
-cd ShTP
-git clone https://github.com/ITClassDev/Docker
-git clone https://github.com/ITClassDev/Backend
-git clone https://github.com/ITClassDev/FrontEnd
+sudo pacman -S docker docker-compose && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/FrontEnd
 ```
 Debian-Based systems:
 ```shell
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common -fy
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -fy
-sudo apt install docker docker-compose -fy
-sudo systemctl enable docker
-sudo systemctl start docker
-mkdir ShTP
-cd ShTP
-git clone https://github.com/ITClassDev/Docker
-git clone https://github.com/ITClassDev/Backend
-git clone https://github.com/ITClassDev/FrontEnd
+sudo apt update && sudo apt install apt-transport-https ca-certificates curl software-properties-common -fy && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y && sudo apt install docker docker-compose -fy && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/FrontEnd
 ```
 
 If you run ShTP on production server, you have to tune backend settings in `Backend/Dockerfile` file(for more refer to Backend's readme). </br>
@@ -43,8 +25,7 @@ ITC_SETUP_MODE=1 # Set this value to 1 to enable setup mode on ShTP, then after 
 ### Run
 Just use run.sh script in Docker folder
 ```shell
-cd Docker
-./run.sh
+cd ShTP/Docker && ./run.sh
 ```
 
 # Manual installation
