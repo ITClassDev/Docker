@@ -26,7 +26,7 @@ services:
   
   frontend:
     build: ${FRONTEND_SOURCE}
-    command: npx serve build
+    command: npx pm2 serve build --spa --port 3000
     depends_on: 
       - api
     ports: # Expose docker 3000 port (frontend) to host machine
