@@ -26,12 +26,11 @@ services:
   
   frontend:
     build: ${FRONTEND_SOURCE}
-    command: npx pm2 serve build --spa --port 3000
+    command: npx pm2 --no-daemon serve build --port 3000 --spa
     depends_on: 
       - api
     ports: # Expose docker 3000 port (frontend) to host machine
       - 3000:3000
-
 
   nginx:
     depends_on:
@@ -42,7 +41,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - "3050:80"
+      - "80:80"
 
 volumes:
   postgres_data:

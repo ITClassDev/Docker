@@ -14,6 +14,17 @@ services:
       POSTGRES_PASSWORD:  root # Change for yours
       POSTGRES_DB: itc_system # Change for yours
 
+  nginx:
+    depends_on:
+      - api
+      - frontend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+
   api:
     build: ${BACKEND_SOURCE}
     command: python3 /api/app/main.py
@@ -27,11 +38,8 @@ services:
   frontend:
     build: ${FRONTEND_SOURCE}
     tty: true
-    stdin_open: true
-      #command: "npx pm2 serve build --force --spa --port 3000"
-      #command: "tail -f /dev/null"
-    command: "npx pm2 --no-daemon serve build --port 3000 --spa" #"npx pm2 serve build --force --spa --port 9090"
-      #command: "npx pm2 serve build --force --spa --port 9090 & tail -f /dev/null"
+    stdin_open: true 
+    command: "npx pm2 --no-daemon serve build --port 3000 --spa"
     depends_on: 
       - api
     ports: # Expose docker 3000 port (frontend) to host machine
