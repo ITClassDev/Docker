@@ -26,7 +26,12 @@ services:
   
   frontend:
     build: ${FRONTEND_SOURCE}
-    command: npx pm2 serve build --spa --port 3000
+    tty: true
+    stdin_open: true
+      #command: "npx pm2 serve build --force --spa --port 3000"
+      #command: "tail -f /dev/null"
+    command: "npx pm2 --no-daemon serve build --port 3000 --spa" #"npx pm2 serve build --force --spa --port 9090"
+      #command: "npx pm2 serve build --force --spa --port 9090 & tail -f /dev/null"
     depends_on: 
       - api
     ports: # Expose docker 3000 port (frontend) to host machine
