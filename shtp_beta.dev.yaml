@@ -19,8 +19,19 @@ services:
     command: python3 /api/app/main.py
     volumes:
       - .:/usr/src/itc_system
+      - ../Backend/app/static/:/api/app/static
     ports: # Expose docker 8080 port (rest api) to host machine
       - 8080:8080
+    environment:
+      ITC_DATABASE_URL: "postgresql://root:root@db:5432/itc_system"
+      ITC_SERV_PORT: 8080
+      ITC_SERV_HOST: "0.0.0.0"
+      ITC_SECRET_KEY: "ha58:yadyfysdydhcwhifbfsdu723772s"
+      ITC_ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      ITC_USERS_STORAGE: "/api/app/static/users_data/uploads/"
+      ITC_API_VER: "0.0.3"
+      ITC_SETUP_MODE: 1
+
     depends_on:
       - db
   
