@@ -1,2 +1,2 @@
 source ./.env
-sudo docker-compose -f docker-compose.dev.yaml up
+sudo docker-compose -f shtp_beta.dev.yaml up --build
