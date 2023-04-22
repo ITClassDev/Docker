@@ -9,11 +9,11 @@ These scripts perform the following actions:
 
 Arch-Based systems:
 ```shell
-sudo pacman -S docker docker-compose && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/FrontEnd
+sudo pacman -S docker docker-compose && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/Frontend
 ```
 Debian-Based systems:
 ```shell
-sudo apt update && sudo apt install apt-transport-https ca-certificates curl software-properties-common -fy && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y && sudo apt install docker docker-compose -fy && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/FrontEnd
+sudo apt update && sudo apt install apt-transport-https ca-certificates curl software-properties-common -fy && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" -y && sudo apt install docker docker-compose -fy && sudo systemctl enable docker && sudo systemctl start docker && mkdir ShTP && git clone https://github.com/ITClassDev/Docker ShTP/Docker && git clone https://github.com/ITClassDev/Backend ShTP/Backend && git clone https://github.com/ITClassDev/FrontEnd ShTP/Frontend
 ```
 
 If you run ShTP on production server, you have to tune backend settings in `Backend/Dockerfile` file(for more refer to Backend's readme). </br>
