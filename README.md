@@ -1,5 +1,5 @@
 # Docker env
-We created a compose of docker containers to run ShTP via one command(almost). TODO: Add Nginx for production setup.
+We created a compose of docker containers to run ShTP via one command(almost).
 
 # Automatic installation
 ### Prepare
