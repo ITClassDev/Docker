@@ -32,6 +32,7 @@ services:
       ITC_API_VER: "0.0.3"
       ITC_SETUP_MODE: 1
       ITC_CHECKER_SERVICE: "http://172.17.0.1:7777"
+      ITC_ROOT_PATH: "/api"
 
     depends_on:
       - db
