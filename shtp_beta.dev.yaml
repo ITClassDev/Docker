@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 services:
   db:
     image:  postgres:14 # Image with postgresql
@@ -6,13 +6,18 @@ services:
     expose:
       - 5432
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       POSTGRES_USER:  root # Change for yours
       POSTGRES_PASSWORD:  root # Change for yours
       POSTGRES_DB: itc_system # Change for yours
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 1s
+      timeout: 5s
+      retries: 30
 
   api:
     build: ${BACKEND_SOURCE}
@@ -21,7 +26,7 @@ services:
       - .:/usr/src/itc_system
       - ../Backend/app/static/:/api/app/static
     ports: # Expose docker 8080 port (rest api) to host machine
-      - 8080:8080
+      - "8080:8080"
     environment:
       ITC_DATABASE_URL: "postgresql://root:root@db:5432/itc_system"
       ITC_SERV_PORT: 8080
@@ -35,7 +40,8 @@ services:
       ITC_ROOT_PATH: "/api"
 
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   
   frontend:
     build: ${FRONTEND_SOURCE}
@@ -43,7 +49,7 @@ services:
     depends_on: 
       - api
     ports: # Expose docker 3000 port (frontend) to host machine
-      - 3000:3000
+      - "3000:3000"
 
   nginx:
     depends_on:
