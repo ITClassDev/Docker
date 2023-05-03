@@ -21,7 +21,16 @@ services:
 
   api:
     build: ${BACKEND_SOURCE}
-    command: python3 /api/app/main.py
+    command:
+      - /bin/bash
+      - -c
+      - |
+        cd ./app
+        alembic -c alembic_docker.ini downgrade base
+        alembic -c alembic_docker.ini stamp base
+        alembic -c alembic_docker.ini revision --autogenerate -m 'Init'
+        alembic -c alembic_docker.ini upgrade head
+        python3 main.py
     volumes:
       - .:/usr/src/itc_system
       - ../Backend/app/static/:/api/app/static
