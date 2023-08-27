@@ -25,12 +25,7 @@ services:
       - /bin/bash
       - -c
       - |
-        #alembic -c alembic_docker.ini downgrade base
-        #alembic -c alembic_docker.ini stamp base
-        #alembic -c alembic_docker.ini revision --autogenerate -m 'Init'
-        #alembic -c alembic_docker.ini upgrade head
         ./migrate.sh
-        echo $(pwd)
         ./run.sh
     volumes:
       - .:/usr/src/itc_system
@@ -39,7 +34,7 @@ services:
       - "8080:8080"
     environment:
       API_V1_PREFIX: "/api/v1"
-      DEBUG: False # REMOVE ON PROD
+      DEBUG: 0 # REMOVE ON PROD
       PROJECT_NAME: "ShTP Project"
       VERSION: "2.0.0"
       DESCRIPTION: "Licensed version of ShTP distribution for 1561 School"
