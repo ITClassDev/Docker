@@ -41,7 +41,7 @@ services:
       API_V1_PREFIX: "/api/v1"
       DEBUG: False # REMOVE ON PROD
       PROJECT_NAME: "ShTP Project"
-      VERSION: "1.0.0"
+      VERSION: "2.0.0"
       DESCRIPTION: "Licensed version of ShTP distribution for 1561 School"
       DB_ASYNC_CONNECTION_STR: "postgresql+asyncpg://root:root@db:5432/itc_system"
       DB_ASYNC_TEST_CONNECTION_STR: "postgresql+asyncpg://root:root@db:5432/itc_system"
