@@ -1,9 +1,6 @@
 # Setup docker
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo groupadd docker
-sudo usermod -aG docker $USER
-newgrp docker
+# sudo apt install docker docker-compose -y
+sudo systemctl enable docker && sudo systemctl start docker && sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
 
 # Download sources
 mkdir ShTP && cd ShTP
