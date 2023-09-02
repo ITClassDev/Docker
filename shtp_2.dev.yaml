@@ -25,18 +25,18 @@ services:
       - /bin/bash
       - -c
       - |
-        ./migrate.sh
+        alembic upgrade head # Upgrade db
         ./run.sh
     volumes:
       - .:/usr/src/itc_system
-      - ../Backend/app/static/:/api/app/static
+      - ${BACKEND_SOURCE}app/storage:/api/app/storage
     ports: # Expose docker 8080 port (rest api) to host machine
       - "8080:8080"
     environment:
       API_V1_PREFIX: "/api/v1"
       DEBUG: 0 # REMOVE ON PROD
       PROJECT_NAME: "ShTP Project"
-      VERSION: "2.0.0"
+      VERSION: "2.0.0 Enigma"
       DESCRIPTION: "Licensed version of ShTP distribution for 1561 School"
       DB_ASYNC_CONNECTION_STR: "postgresql+asyncpg://root:root@db:5432/itc_system"
       DB_ASYNC_TEST_CONNECTION_STR: "postgresql+asyncpg://root:root@db:5432/itc_system"
@@ -44,7 +44,7 @@ services:
       SECRET_KEY: "12345"
       JWT_ALGORITHM: "HS256"
       JWT_ACCESS_TOKEN_EXPIRE_AT_MINUTES: 3000
-      USER_STORAGE: "./app/storage/users_data/uploads/"
+      USER_STORAGE: "/api/app/storage/users_data/uploads/"
       PROFIL_ENDPOINT: "https://regs.temocenter.ru/graphql"
       PROFIL_CATEGORY: 45
       CHECKER_API: "http://localhost:7777/"
